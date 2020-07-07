@@ -1,0 +1,26 @@
+<%- include('partials/header') %>
+
+<div class="jumbotron jumbotron-fluid bg-transparent m-0 pt-0 text-center">
+  <div class="container">
+    <h1 class="display-4">Camp Grounds</h1>
+    <p class="lead">List of all the camps around the Philippines</p>
+  </div>
+</div>
+
+  
+<div class="container">
+  <div class="row">
+    <% camps.forEach ((camps)  => { %> 
+    <div class="col-lg-4 col-md-6 mb-5 mt-5">
+        <div class="card mx-auto" style="width: 19rem;">
+          <a href="campGrounds/<%= camps.id %>"><img src="<%= camps.image %>" class="card-img-top" alt="..."></a>
+            <div class="card-body text-center">
+              <a class="card-text overflow-auto" href="campGrounds/<%= camps.id %>"><%= camps.name %></a>
+            </div>
+        </div>
+    </div>
+    <% }); %>
+  </div>
+</div>
+<%- include('partials/footer') %>
+

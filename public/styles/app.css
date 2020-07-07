@@ -1,0 +1,25 @@
+body {
+	background-color: #8491a5;
+}
+
+footer {
+	text-align: center;
+}
+
+.imgDet {
+	width: 400px;
+}
+
+#campDesc {
+	resize: none;
+	overflow: scroll;
+}
+
+.comments {
+	margin: 0;
+}
+
+.fInline {
+	display: inline;
+	text-align: right;
+}

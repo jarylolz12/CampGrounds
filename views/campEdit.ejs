@@ -1,0 +1,21 @@
+<%- include('partials/header') %>
+
+<div class="container-fluid border border-dark rounded-sm p-3 shadow-sm p-3 mb-5 col-lg-4 col-md-5 col-sm-6">
+    <h3>Edit Camp <%= edits.name %></h3>
+    <hr class="border-bottom-0">
+    <form action="/campGrounds/<%= edits.id %>/campEdit?_method=PUT" method="POST">
+      <div class="form-group text-left">
+        <label for="campName">Name:</label> 
+        <input type="text" class="form-control" id="campName" name="campName" value="<%= edits.name %>">
+        <label for="campLoc">Location:</label>
+        <input type="text" class="form-control" id="campLoc" name="campLoc" value="<%= edits.loc %>">
+        <label for="campImg">Image:</label>
+        <input type="text" class="form-control" id="campImg" name="campImg" value="<%= edits.image %>">
+        <label for="campDesc">Description:</label>
+        <input type="text" class="form-control" id="campDesc" name="campDesc" value="<%= edits.desc %>">
+      </div>
+      <button type="submit" class="btn btn-outline-dark btn-md">Submit</button>
+    </form>
+</div>
+
+<%- include('partials/footer') %>

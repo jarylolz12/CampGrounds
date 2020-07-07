@@ -1,0 +1,111 @@
+<%- include('partials/header') %>
+   
+
+<div class="container text-center mt-5">
+    <img class="imgDet"src="<%= results.image %>" alt="">
+    <p><strong><%= results.name %></strong></p>
+    <p><%= results.loc %></p>
+    <p><%= results.date %></p>
+    <p><%= results.desc %></p>
+    <p>by: <%=results.user[0].name%></p>
+    
+
+  <% if (!isWhoAmI){ %>
+     
+  <% }else if (results.user[0].id !== isWhoAmI.id){ %>
+     
+  <% }else{ %>
+      <a href="/campGrounds/<%= results.id %>/campEdit" class="btn btn-outline-dark btn-md">Edit</a>
+      <form class="fInline" action="/campGrounds/<%= results.id %>?_method=DELETE" method="POST">
+        <button type="submit" class="btn btn-outline-dark btn-md">Delete</button>
+     </form>  
+  <% } %>
+     
+</div>
+
+
+   
+<div class="container-fluid border border-dark rounded-sm p-3 shadow-sm p-3 mb-5 col-lg-4 col-md-5 col-sm-6">
+<% if (!isWhoAmI){ %>
+<% } else{ %>
+  <h3>Post a comment</h3>
+  <form action="/campGrounds/<%= results.id %>/getComments" method="POST">
+    <div class="form-group">
+      <label for="campComment">Comment:</label>
+      <input type="text" class="form-control" id="campComment" name="campComment">
+    </div>
+    <button type="submit" class="btn btn-outline-dark btn-md">Submit</button>
+  </form>
+  <hr>   
+<% } %>
+
+<h4>Comments:</h4>
+
+<% results.comments.forEach((user) => { %> 
+
+  <div class="container border border-dark rounded-sm mb-2 pb-2">
+    <p class="comments"><strong><%=user.user[0].name%></strong> - <%=user.date%>    
+      <% if(user.isEdited === true){ %>
+          <span class="badge badge-secondary">- Edited</span>
+        <% } %>
+    </p>
+
+    <p><%=user.comments%></p>
+    
+    <% if(!isWhoAmI){ %>
+     
+    <% } else if (isWhoAmI.id === user.user[0].id && results.user[0].id === isWhoAmI.id){ %>  
+      
+      <a href="#collapse<%=user.id.slice(5,10)%>" data-toggle="collapse" class="btn btn-sm border-dark rounded-sm">Edit</a>
+
+      <form class="fInline" action="/campGrounds/<%= results.id %>/delComments/<%=user.id%>?_method=DELETE" method="POST">  
+        <button type="submit" class="btn btn-sm border-dark rounded-sm">Delete</button>
+      </form>  
+
+      <div class="collapse" id="collapse<%=user.id.slice(5,10)%>">
+        <hr>  
+            <form action="/campGrounds/<%= results.id %>/editComments/<%=user.id%>?_method=PUT" method="POST">  
+                <label for="campCommentUpdt">Edit Comment:</label>
+                <input type="text" class="form-control mb-2" id="campCommentUpdt" name="campCommentUpdt" value="<%=user.comments%>">
+                <button type="submit" class="btn btn-outline-dark btn-sm">Submit</button>
+            </form>        
+        </div>
+      
+    <% } else if(isWhoAmI.id !== user.user[0].id && results.user[0].id === isWhoAmI.id){ %>
+
+      <form class="fInline" action="/campGrounds/<%= results.id %>/delComments/<%=user.id%>?_method=DELETE" method="POST">  
+        <button type="submit" class="btn btn-sm border-dark rounded-sm">Delete</button>
+      </form>  
+
+    <% }else if (isWhoAmI.id === user.user[0].id  && results.user[0].id !== isWhoAmI.id ){%>
+
+      <a href="#collapse<%=user.id.slice(5,10)%>" data-toggle="collapse" class="btn btn-sm border-dark rounded-sm">Edit</a>
+
+      <form class="fInline" action="/campGrounds/<%= results.id %>/delComments/<%=user.id%>?_method=DELETE" method="POST">  
+        <button type="submit" class="btn btn-sm border-dark rounded-sm">Delete</button>
+      </form>  
+
+      <div class="collapse" id="collapse<%=user.id.slice(5,10)%>">
+        <hr>  
+            <form action="/campGrounds/<%= results.id %>/editComments/<%=user.id%>?_method=PUT" method="POST">  
+                <label for="campCommentUpdt">Edit Comment:</label>
+                <input type="text" class="form-control mb-2" id="campCommentUpdt" name="campCommentUpdt" value="<%=user.comments%>">
+                <button type="submit" class="btn btn-outline-dark btn-sm">Submit</button>
+            </form>        
+        </div>
+
+    <% }; %>
+
+   
+       
+  </div>  
+
+<% }); %>
+
+<a href="/campGrounds" class="btn btn-outline-dark btn-md">Back</a>
+</div>
+
+
+
+
+<%- include('partials/footer') %>

@@ -1,11 +1,21 @@
 const mongoose = require('mongoose'),
 	passLocMongo = require('passport-local-mongoose');
-mongoose.connect('mongodb://localhost:27017/campSite', {
-	// pangalan or pag create sa imong database
-	useNewUrlParser: true,
-	useUnifiedTopology: true,
-	useFindAndModify: false
-});
+// mongoose.connect('mongodb://localhost:27017/campSite', {
+// 	// pangalan or pag create sa imong database
+// 	useNewUrlParser: true,
+// 	useUnifiedTopology: true,
+// 	useFindAndModify: false
+// });
+
+mongoose.connect(
+	'mongodb+srv://zjeArr:alisaca1234@campgrounds.vilan.gcp.mongodb.net/campgrounds?retryWrites=true&w=majority',
+	{
+		// pangalan or pag create sa imong database
+		useNewUrlParser: true,
+		useUnifiedTopology: true,
+		useFindAndModify: false
+	}
+);
 
 //purpose sa schema is for collections (tables). para sa imong database
 
